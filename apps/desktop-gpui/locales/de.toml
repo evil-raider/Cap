@@ -3234,3 +3234,6 @@ verification_failed = "Die Prüfung der Aufnahme ist fehlgeschlagen: {status}"
 
 [message.cli]
 binary_missing = "Mitgelieferte CLI unter {path} nicht gefunden"
+[settings.general.app.tray_icon]
+label = "Taskleistensymbol immer anzeigen"
+description = "Symbol im Leerlauf anzeigen. Während der Aufnahme bleibt es zum Stoppen sichtbar."

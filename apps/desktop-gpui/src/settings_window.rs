@@ -3350,28 +3350,45 @@ impl SettingsWindow {
             None,
             vec![
                 self.rows(vec![
-                    self.setting_row(
-                        tr::settings::general::app::dock_icon::label(),
-                        Some(tr::settings::general::app::dock_icon::description()),
-                        // The row is the *inverse* of the stored key.
-                        self.toggle(
-                            "hide-dock-icon",
+                    if cfg!(target_os = "windows") {
+                        self.setting_row(
+                            tr::settings::general::app::tray_icon::label(),
+                            Some(tr::settings::general::app::tray_icon::description()),
+                            self.toggle(
+                                "show-tray-icon",
+                                tr::settings::general::app::tray_icon::label(),
+                                self.settings.show_tray_icon,
+                                cx,
+                                |this, cx| {
+                                    this.settings.show_tray_icon = !this.settings.show_tray_icon;
+                                    let value = this.settings.show_tray_icon;
+                                    this.write_bool("showTrayIcon", value, cx);
+                                    #[cfg(target_os = "windows")]
+                                    cx.defer(crate::tray::refresh_visibility);
+                                },
+                            ).into_any_element(),
+                        ).into_any_element()
+                    } else {
+                        self.setting_row(
                             tr::settings::general::app::dock_icon::label(),
-                            !self.settings.hide_dock_icon,
-                            cx,
-                            |this, cx| {
-                                this.settings.hide_dock_icon = !this.settings.hide_dock_icon;
-                                let value = this.settings.hide_dock_icon;
-                                this.write_bool("hideDockIcon", value, cx);
-                                // `GeneralSettingsStore::set` -> the store
-                                // listener -> `schedule_macos_dock_visibility_sync`.
-                                // Deferred past the debounced write, which is
-                                // what the sync then reads back.
-                                cx.defer(|cx: &mut gpui::App| crate::menus::schedule_dock_sync(cx));
-                            },
+                            Some(tr::settings::general::app::dock_icon::description()),
+                            // The row is the *inverse* of the stored key.
+                            self.toggle(
+                                "hide-dock-icon",
+                                tr::settings::general::app::dock_icon::label(),
+                                !self.settings.hide_dock_icon,
+                                cx,
+                                |this, cx| {
+                                    this.settings.hide_dock_icon = !this.settings.hide_dock_icon;
+                                    let value = this.settings.hide_dock_icon;
+                                    this.write_bool("hideDockIcon", value, cx);
+                                    cx.defer(|cx: &mut gpui::App| crate::menus::schedule_dock_sync(cx));
+                                },
+                            )
+                            .into_any_element(),
                         )
-                        .into_any_element(),
-                    ),
+                        .into_any_element()
+                    },
                     self.setting_row(
                         tr::settings::general::app::notifications::label(),
                         Some(tr::settings::general::app::notifications::description()),

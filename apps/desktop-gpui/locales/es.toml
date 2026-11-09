@@ -3234,3 +3234,6 @@ verification_failed = "La verificación de la grabación ha fallado: {status}"
 
 [message.cli]
 binary_missing = "No se encontró la CLI incluida en {path}"
+[settings.general.app.tray_icon]
+label = "Mostrar siempre el icono de la bandeja"
+description = "Mostrar el icono en reposo. Durante la grabación permanece visible para detenerla."

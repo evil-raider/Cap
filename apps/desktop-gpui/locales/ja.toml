@@ -3234,3 +3234,6 @@ verification_failed = "録画の確認に失敗しました：{status}"
 
 [message.cli]
 binary_missing = "{path}に同梱のCLIが見つかりません"
+[settings.general.app.tray_icon]
+label = "トレイアイコンを常に表示"
+description = "待機中もアイコンを表示します。録画中は停止できるように常に表示されます。"

@@ -130,6 +130,8 @@ fn english_matches_the_literals_it_replaced() {
             "Choose how Cap shows up on your system.".into(),
         ),
         (tr::settings::general::app::title(), "App".into()),
+        (tr::settings::general::app::tray_icon::label(), "Always show tray icon".into()),
+        (tr::settings::general::app::tray_icon::description(), "Show the icon when idle. It remains visible during recording so you can stop it.".into()),
         (
             tr::settings::general::app::dock_icon::description(),
             "Keep Cap in the dock even when no windows are open.".into(),

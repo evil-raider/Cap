@@ -3234,3 +3234,6 @@ verification_failed = "रिकॉर्डिंग की जाँच वि
 
 [message.cli]
 binary_missing = "{path} पर बंडल की गई CLI नहीं मिली"
+[settings.general.app.tray_icon]
+label = "ट्रे आइकन हमेशा दिखाएँ"
+description = "निष्क्रिय होने पर आइकन दिखाएँ। रिकॉर्डिंग रोकने के लिए यह रिकॉर्डिंग के दौरान दिखता रहेगा।"

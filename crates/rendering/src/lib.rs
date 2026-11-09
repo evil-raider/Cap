@@ -5770,6 +5770,7 @@ mod tests {
     #[test]
     fn click_ripples_respect_visibility_and_the_instance_limit() {
         let mut project = ProjectConfiguration::default();
+        project.cursor.ripple.enabled = false;
         let events = CursorEvents {
             clicks: (0..10)
                 .map(|index| ripple_click(index as f64, true))

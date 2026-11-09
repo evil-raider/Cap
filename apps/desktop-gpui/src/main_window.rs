@@ -136,12 +136,12 @@ impl Mode {
     }
 
     /// `get_current_mode` (`src-tauri/src/tray.rs:355-361`): the stored mode,
-    /// falling back to `RecordingMode::default()`, which is Instant.
+    /// falling back to Studio when no mode has been saved.
     pub fn from_store() -> Self {
         crate::store::recording_mode_slug()
             .as_deref()
             .and_then(Self::from_slug)
-            .unwrap_or(Self::Instant)
+            .unwrap_or(Self::Studio)
     }
 
     pub fn icon(self) -> &'static str {

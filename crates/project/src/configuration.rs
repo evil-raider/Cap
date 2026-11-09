@@ -892,7 +892,12 @@ impl Default for CursorConfiguration {
             base_rotation: 0.0,
             click_spring: None,
             stop_movement_in_last_seconds: None,
-            ripple: CursorRippleConfig::default(),
+            // New projects show click ripples; older projects missing this
+            // field retain CursorRippleConfig's disabled deserialization default.
+            ripple: CursorRippleConfig {
+                enabled: true,
+                ..CursorRippleConfig::default()
+            },
         };
 
         if let Some(preset) = animation_style.preset() {
@@ -5433,6 +5438,12 @@ mod tests {
         assert_eq!(spring.stiffness, default_spring.stiffness);
         assert_eq!(spring.damping, default_spring.damping);
         assert_eq!(spring.mass, default_spring.mass);
+    }
+
+    #[test]
+    fn new_project_enables_click_ripples() {
+        assert!(ProjectConfiguration::default().cursor.ripple.enabled);
+        assert!(!CursorRippleConfig::default().enabled);
     }
 
     #[test]

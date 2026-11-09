@@ -3234,3 +3234,6 @@ verification_failed = "La vérification de l'enregistrement a échoué : {status
 
 [message.cli]
 binary_missing = "CLI intégrée introuvable dans {path}"
+[settings.general.app.tray_icon]
+label = "Toujours afficher l’icône de la zone de notification"
+description = "Afficher l’icône au repos. Elle reste visible pendant l’enregistrement pour pouvoir l’arrêter."

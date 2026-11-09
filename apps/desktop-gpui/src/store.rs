@@ -738,7 +738,7 @@ settings_enum! {
         ScreenRegion = "screenRegion", tr::settings::options::window_capture::screen_region();
         FocusedWindow = "focusedWindow", tr::settings::options::window_capture::focused_window();
     }
-    default = ScreenRegion
+    default = FocusedWindow
 }
 
 settings_enum! {
@@ -960,6 +960,8 @@ pub struct GeneralSettings {
     /// GPUI-only key; the Tauri app keeps it as an unknown field.
     pub ui_language: Option<String>,
     pub hide_dock_icon: bool,
+    /// Whether to show the Windows tray icon when not recording.
+    pub show_tray_icon: bool,
     pub enable_notifications: bool,
     pub instant_mode_max_resolution: u32,
     pub disable_auto_open_links: bool,
@@ -1303,7 +1305,7 @@ pub fn set_recording_microphone_name(name: Option<&str>) -> bool {
 /// `RecordingSettingsStore.mode`, i.e. `cap_recording::RecordingMode` under
 /// `#[serde(rename_all = "camelCase")]` -- one lowercase word per variant
 /// (`studio`, `instant`, `screenshot`). `None` when the key is absent, which
-/// `get_current_mode` turns into `RecordingMode::default()` (Instant).
+/// the GPUI main window defaults to Studio when no mode has been saved.
 pub fn recording_mode_slug() -> Option<String> {
     store_section(RECORDING_SETTINGS)
         .get("mode")
@@ -1401,6 +1403,7 @@ impl GeneralSettings {
             theme: enum_at(general, "theme"),
             ui_language: opt_string_at(general, crate::i18n::SETTING_KEY),
             hide_dock_icon: bool_at(general, "hideDockIcon", false),
+            show_tray_icon: bool_at(general, "showTrayIcon", false),
             enable_notifications: bool_at(general, "enableNotifications", true),
             instant_mode_max_resolution: u32_at(general, "instantModeMaxResolution", 1920),
             disable_auto_open_links: bool_at(general, "disableAutoOpenLinks", false),
@@ -1408,7 +1411,7 @@ impl GeneralSettings {
                 .get(SHOW_MAIN_WINDOW_AFTER_INSTANT_KEY)
                 .and_then(Value::as_bool),
             studio_recording_quality: enum_at(general, "studioRecordingQuality"),
-            recording_countdown: opt_u32_at(general, "recordingCountdown"),
+            recording_countdown: Some(u32_at(general, "recordingCountdown", 5)),
             main_window_recording_start_behaviour: enum_at(
                 general,
                 "mainWindowRecordingStartBehaviour",
@@ -3086,6 +3089,19 @@ mod tests {
     /// Every value the page can read back has to survive the round trip, and
     /// an unknown enum value must degrade to that one row's default rather
     /// than blanking the page.
+    #[test]
+    fn personalized_defaults_and_saved_choices() {
+        let defaults = GeneralSettings::default();
+        assert_eq!(defaults.recording_countdown, Some(5));
+        assert_eq!(defaults.window_capture_style, WindowCaptureStyle::FocusedWindow);
+        assert!(!defaults.show_tray_icon);
+        let general = serde_json::json!({"recordingCountdown": 0, "windowCaptureStyle": "screenRegion", "showTrayIcon": true});
+        let saved = GeneralSettings::from_sections(general.as_object().unwrap(), &Map::new(), &Map::new());
+        assert_eq!(saved.recording_countdown, Some(0));
+        assert_eq!(saved.window_capture_style, WindowCaptureStyle::ScreenRegion);
+        assert!(saved.show_tray_icon);
+    }
+
     #[test]
     fn typed_reads_match_the_store_shape() {
         let _store = TempStore::new(

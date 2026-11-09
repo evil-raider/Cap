@@ -3235,3 +3235,7 @@ verification_failed = "Не удалось проверить запись: {sta
 
 [message.cli]
 binary_missing = "Исполняемый файл CLI не найден по пути {path}"
+
+[settings.general.app.tray_icon]
+label = "Всегда показывать значок в трее"
+description = "Показывать значок, когда запись не ведётся. Во время записи значок остаётся видимым для остановки."

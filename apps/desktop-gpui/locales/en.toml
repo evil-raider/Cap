@@ -3236,3 +3236,6 @@ verification_failed = { text = "Recording verification failed: {status}", contex
 
 [message.cli]
 binary_missing = { text = "Bundled CLI binary not found at {path}", context = "{path} is a file path." }
+[settings.general.app.tray_icon]
+label = "Always show tray icon"
+description = "Show the icon when idle. It remains visible during recording so you can stop it."

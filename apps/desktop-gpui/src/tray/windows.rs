@@ -64,6 +64,7 @@ pub fn init(cx: &mut App) {
         }
     }));
     cx.set_global(tray);
+    refresh_visibility(cx);
 
     cx.spawn(async move |cx| {
         while let Ok(event) = rx.recv_async().await {
@@ -209,12 +210,32 @@ fn build_native_item(
     }
 }
 
+fn tray_visible(always_show: bool, recording: bool) -> bool {
+    always_show || recording
+}
+
+/// Keep the stop icon available while recording, even when the idle icon is hidden.
+pub fn refresh_visibility(cx: &mut App) {
+    if !cx.has_global::<Tray>() {
+        return;
+    }
+    let always_show = crate::store::GeneralSettings::load().show_tray_icon;
+    let tray = cx.global::<Tray>();
+    if let Err(error) = tray.icon.set_visible(tray_visible(always_show, tray.recording)) {
+        tracing::warn!(%error, "failed to update Windows tray visibility");
+    }
+}
+
 pub fn set_recording(recording: bool, cx: &mut App) {
     if !cx.has_global::<Tray>() {
         return;
     }
+    let always_show = crate::store::GeneralSettings::load().show_tray_icon;
     let tray = cx.global_mut::<Tray>();
     tray.recording = recording;
+    if let Err(error) = tray.icon.set_visible(tray_visible(always_show, recording)) {
+        tracing::warn!(%error, "failed to update Windows tray visibility");
+    }
     if recording {
         tray.icon.set_menu(None);
     } else {
@@ -309,6 +330,14 @@ pub fn refresh_menu(cx: &mut App) {
 mod tests {
     use super::*;
     use tray_icon::{MouseButton, Rect};
+
+    #[test]
+    fn tray_visibility_keeps_stop_accessible() {
+        assert!(!super::tray_visible(false, false));
+        assert!(super::tray_visible(false, true));
+        assert!(super::tray_visible(true, false));
+        assert!(super::tray_visible(true, true));
+    }
 
     #[test]
     fn menu_titles_preserve_literal_ampersands() {
