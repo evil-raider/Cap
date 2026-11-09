@@ -20,18 +20,22 @@ jobs:
           if [ -f apps/desktop-gpui/locales/ru.toml.gz.b64 ]; then
             node -e 'const fs=require("fs"),z=require("zlib"); fs.writeFileSync("apps/desktop-gpui/locales/ru.toml",z.gunzipSync(Buffer.from(fs.readFileSync("apps/desktop-gpui/locales/ru.toml.gz.b64","utf8"),"base64")))'
           fi
-      - name: Commit restored catalog
+      - name: Fit Russian labels
+        shell: bash
+        run: |
+          node -e 'const fs=require("fs"),p="apps/desktop-gpui/locales/ru.toml"; let s=fs.readFileSync(p,"utf8"); s=s.replace("system_audio_on = \"Записывать системный звук\"","system_audio_on = \"Записывать звук ОС\"").replace("saving = \"Сохранение…\"","saving = \"Сохран…\""); fs.writeFileSync(p,s)'
+      - name: Commit catalog fixes
         continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
           packed=apps/desktop-gpui/locales/ru.toml.gz.b64
-          if [ -f "$packed" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add apps/desktop-gpui/locales/ru.toml
-            git rm "$packed"
-            git commit -m "Restore Russian localization catalog"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/desktop-gpui/locales/ru.toml
+          if [ -f "$packed" ]; then git rm "$packed"; fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Fit Russian labels to the interface"
             git push origin HEAD:russian-localization
           fi
       - uses: dtolnay/rust-toolchain@1.88.0
