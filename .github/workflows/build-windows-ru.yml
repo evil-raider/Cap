@@ -14,19 +14,25 @@ jobs:
       RUST_TARGET_TRIPLE: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v4
-      - name: Restore Russian catalog and commit it
+      - name: Restore Russian catalog
+        shell: bash
+        run: |
+          if [ -f apps/desktop-gpui/locales/ru.toml.gz.b64 ]; then
+            node -e 'const fs=require("fs"),z=require("zlib"); fs.writeFileSync("apps/desktop-gpui/locales/ru.toml",z.gunzipSync(Buffer.from(fs.readFileSync("apps/desktop-gpui/locales/ru.toml.gz.b64","utf8"),"base64")))'
+          fi
+      - name: Commit restored catalog
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
           packed=apps/desktop-gpui/locales/ru.toml.gz.b64
           if [ -f "$packed" ]; then
-            base64 --decode "$packed" | gzip -d > apps/desktop-gpui/locales/ru.toml
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add apps/desktop-gpui/locales/ru.toml
             git rm "$packed"
             git commit -m "Restore Russian localization catalog"
-            git push origin HEAD:russian-localization || echo "Could not commit catalog; build will continue with the restored file."
+            git push origin HEAD:russian-localization
           fi
       - uses: dtolnay/rust-toolchain@1.88.0
         with:
