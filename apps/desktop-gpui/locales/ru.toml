@@ -1000,7 +1000,7 @@ no_matching_microphones = "Нет подходящих микрофонов"
 no_microphone = "Нет микрофона"
 no_microphones = "Микрофоны не найдены"
 system_audio_off = "Без системного звука"
-system_audio_on = "Записывать системный звук"
+system_audio_on = "Записывать звук ОС"
 
 [main.device.access]
 allow_access = "Разрешить доступ"
@@ -1179,7 +1179,7 @@ error = "Ошибка"
 paused = "Пауза"
 pausing = "Пауза..."
 resuming = "Продолж..."
-saving = "Сохранение…"
+saving = "Сохран…"
 starting = "Запуск"
 
 [controls.marker]
