@@ -18,10 +18,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          log="$RUNNER_TEMP/cap-defaults-error.log"
+          trap 'echo "::error title=Default settings preparation failed::$(tail -c 3000 "$log" | tr "\n" " ")"' ERR
+          exec 2>"$log"
           patch=.github/cap-requested-defaults.patch
           if [ -f "$patch" ]; then
-            git apply --cached --check "$patch"
-            git apply --cached "$patch"
+            # Read the LF-normalized Git blob rather than the Windows checkout.
+            git show "HEAD:$patch" > "$RUNNER_TEMP/cap-defaults.patch"
+            git apply --cached --check "$RUNNER_TEMP/cap-defaults.patch"
+            git apply --cached "$RUNNER_TEMP/cap-defaults.patch"
             git diff --cached --name-only -z | xargs -0 git checkout-index -f --
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
