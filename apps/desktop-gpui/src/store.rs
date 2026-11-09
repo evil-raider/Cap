@@ -797,7 +797,7 @@ settings_enum! {
         Auto = "auto", "Auto";
         Never = "never", "Never";
     }
-    default = Manual
+    default = Never
 }
 
 settings_enum! {
@@ -2149,6 +2149,17 @@ pub fn preset_names() -> Vec<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn update_policy_defaults_to_never_but_preserves_saved_choices() {
+        let mut general = Map::new();
+        assert_eq!(enum_at::<UpdateDownloadPolicy>(&general, "updateDownloadPolicy"), UpdateDownloadPolicy::Never);
+        for (value, expected) in [("auto", UpdateDownloadPolicy::Auto), ("manual", UpdateDownloadPolicy::Manual), ("never", UpdateDownloadPolicy::Never)] {
+            general.insert("updateDownloadPolicy".into(), Value::String(value.into()));
+            assert_eq!(enum_at::<UpdateDownloadPolicy>(&general, "updateDownloadPolicy"), expected);
+        }
+    }
+
 
     struct TempStore {
         path: PathBuf,
