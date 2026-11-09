@@ -1,0 +1,396 @@
+diff --git a/apps/desktop-gpui/locales/de.toml b/apps/desktop-gpui/locales/de.toml
+index 5ab3643..fb1eb43 100644
+--- a/apps/desktop-gpui/locales/de.toml
++++ b/apps/desktop-gpui/locales/de.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "Für diese Aufnahme gibt es keinen fortsetzbaren Upload"
+ verification_failed = "Die Prüfung der Aufnahme ist fehlgeschlagen: {status}"
+ 
+ [message.cli]
+-binary_missing = "Mitgelieferte CLI unter {path} nicht gefunden"
+\ No newline at end of file
++binary_missing = "Mitgelieferte CLI unter {path} nicht gefunden"
++[settings.general.app.tray_icon]
++label = "Taskleistensymbol immer anzeigen"
++description = "Symbol im Leerlauf anzeigen. Während der Aufnahme bleibt es zum Stoppen sichtbar."
+diff --git a/apps/desktop-gpui/locales/en.toml b/apps/desktop-gpui/locales/en.toml
+index 91776ce..64256b6 100644
+--- a/apps/desktop-gpui/locales/en.toml
++++ b/apps/desktop-gpui/locales/en.toml
+@@ -3235,4 +3235,7 @@ no_resumable_state = "This recording has no resumable upload state"
+ verification_failed = { text = "Recording verification failed: {status}", context = "{status} is a technical status, usually in English." }
+ 
+ [message.cli]
+-binary_missing = { text = "Bundled CLI binary not found at {path}", context = "{path} is a file path." }
+\ No newline at end of file
++binary_missing = { text = "Bundled CLI binary not found at {path}", context = "{path} is a file path." }
++[settings.general.app.tray_icon]
++label = "Always show tray icon"
++description = "Show the icon when idle. It remains visible during recording so you can stop it."
+diff --git a/apps/desktop-gpui/locales/es.toml b/apps/desktop-gpui/locales/es.toml
+index 5df166f..8a44735 100644
+--- a/apps/desktop-gpui/locales/es.toml
++++ b/apps/desktop-gpui/locales/es.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "Esta grabación no tiene una subida que se pueda reanudar"
+ verification_failed = "La verificación de la grabación ha fallado: {status}"
+ 
+ [message.cli]
+-binary_missing = "No se encontró la CLI incluida en {path}"
+\ No newline at end of file
++binary_missing = "No se encontró la CLI incluida en {path}"
++[settings.general.app.tray_icon]
++label = "Mostrar siempre el icono de la bandeja"
++description = "Mostrar el icono en reposo. Durante la grabación permanece visible para detenerla."
+diff --git a/apps/desktop-gpui/locales/fr.toml b/apps/desktop-gpui/locales/fr.toml
+index d138e1e..815ca65 100644
+--- a/apps/desktop-gpui/locales/fr.toml
++++ b/apps/desktop-gpui/locales/fr.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "Cet enregistrement n'a pas d'envoi pouvant reprendre"
+ verification_failed = "La vérification de l'enregistrement a échoué : {status}"
+ 
+ [message.cli]
+-binary_missing = "CLI intégrée introuvable dans {path}"
+\ No newline at end of file
++binary_missing = "CLI intégrée introuvable dans {path}"
++[settings.general.app.tray_icon]
++label = "Toujours afficher l’icône de la zone de notification"
++description = "Afficher l’icône au repos. Elle reste visible pendant l’enregistrement pour pouvoir l’arrêter."
+diff --git a/apps/desktop-gpui/locales/hi.toml b/apps/desktop-gpui/locales/hi.toml
+index 3ee5bc5..7edf786 100644
+--- a/apps/desktop-gpui/locales/hi.toml
++++ b/apps/desktop-gpui/locales/hi.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "इस रिकॉर्डिंग का कोई ऐ
+ verification_failed = "रिकॉर्डिंग की जाँच विफल हुई: {status}"
+ 
+ [message.cli]
+-binary_missing = "{path} पर बंडल की गई CLI नहीं मिली"
+\ No newline at end of file
++binary_missing = "{path} पर बंडल की गई CLI नहीं मिली"
++[settings.general.app.tray_icon]
++label = "ट्रे आइकन हमेशा दिखाएँ"
++description = "निष्क्रिय होने पर आइकन दिखाएँ। रिकॉर्डिंग रोकने के लिए यह रिकॉर्डिंग के दौरान दिखता रहेगा।"
+diff --git a/apps/desktop-gpui/locales/ja.toml b/apps/desktop-gpui/locales/ja.toml
+index 809fbe9..9f85431 100644
+--- a/apps/desktop-gpui/locales/ja.toml
++++ b/apps/desktop-gpui/locales/ja.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "この録画には再開できるアップロード状態
+ verification_failed = "録画の確認に失敗しました：{status}"
+ 
+ [message.cli]
+-binary_missing = "{path}に同梱のCLIが見つかりません"
+\ No newline at end of file
++binary_missing = "{path}に同梱のCLIが見つかりません"
++[settings.general.app.tray_icon]
++label = "トレイアイコンを常に表示"
++description = "待機中もアイコンを表示します。録画中は停止できるように常に表示されます。"
+diff --git a/apps/desktop-gpui/locales/ru.toml b/apps/desktop-gpui/locales/ru.toml
+index 3df438a..6faf8b4 100644
+--- a/apps/desktop-gpui/locales/ru.toml
++++ b/apps/desktop-gpui/locales/ru.toml
+@@ -3235,3 +3235,7 @@ verification_failed = "Не удалось проверить запись: {sta
+ 
+ [message.cli]
+ binary_missing = "Исполняемый файл CLI не найден по пути {path}"
++
++[settings.general.app.tray_icon]
++label = "Всегда показывать значок в трее"
++description = "Показывать значок, когда запись не ведётся. Во время записи значок остаётся видимым для остановки."
+diff --git a/apps/desktop-gpui/locales/zh-CN.toml b/apps/desktop-gpui/locales/zh-CN.toml
+index 8951244..7059860 100644
+--- a/apps/desktop-gpui/locales/zh-CN.toml
++++ b/apps/desktop-gpui/locales/zh-CN.toml
+@@ -3233,4 +3233,7 @@ no_resumable_state = "此录制没有可继续的上传状态"
+ verification_failed = "录制验证失败：{status}"
+ 
+ [message.cli]
+-binary_missing = "未在 {path} 找到内置的 CLI 程序"
+\ No newline at end of file
++binary_missing = "未在 {path} 找到内置的 CLI 程序"
++[settings.general.app.tray_icon]
++label = "始终显示托盘图标"
++description = "空闲时显示图标。录制期间始终显示，以便停止录制。"
+diff --git a/apps/desktop-gpui/src/app_windows.rs b/apps/desktop-gpui/src/app_windows.rs
+index 7ac8a7f..56945e0 100644
+--- a/apps/desktop-gpui/src/app_windows.rs
++++ b/apps/desktop-gpui/src/app_windows.rs
+@@ -1649,7 +1649,7 @@ pub fn open_mode_select(cx: &mut App) -> bool {
+     let main = cx.global::<AppWindows>().main;
+     let mode = main
+         .update(cx, |view, _window, cx| view.effective_mode(cx))
+-        .unwrap_or(Mode::Instant);
++        .unwrap_or(Mode::Studio);
+ 
+     if let Some(handle) = cx.global::<AppWindows>().mode_select {
+         // A live window is reused, re-reading the mode the way a re-shown
+diff --git a/apps/desktop-gpui/src/i18n/tests.rs b/apps/desktop-gpui/src/i18n/tests.rs
+index 19cc249..e3c3260 100644
+--- a/apps/desktop-gpui/src/i18n/tests.rs
++++ b/apps/desktop-gpui/src/i18n/tests.rs
+@@ -130,6 +130,8 @@ fn english_matches_the_literals_it_replaced() {
+             "Choose how Cap shows up on your system.".into(),
+         ),
+         (tr::settings::general::app::title(), "App".into()),
++        (tr::settings::general::app::tray_icon::label(), "Always show tray icon".into()),
++        (tr::settings::general::app::tray_icon::description(), "Show the icon when idle. It remains visible during recording so you can stop it.".into()),
+         (
+             tr::settings::general::app::dock_icon::description(),
+             "Keep Cap in the dock even when no windows are open.".into(),
+diff --git a/apps/desktop-gpui/src/main_window.rs b/apps/desktop-gpui/src/main_window.rs
+index 1a51576..6c58c42 100644
+--- a/apps/desktop-gpui/src/main_window.rs
++++ b/apps/desktop-gpui/src/main_window.rs
+@@ -136,12 +136,12 @@ impl Mode {
+     }
+ 
+     /// `get_current_mode` (`src-tauri/src/tray.rs:355-361`): the stored mode,
+-    /// falling back to `RecordingMode::default()`, which is Instant.
++    /// falling back to Studio when no mode has been saved.
+     pub fn from_store() -> Self {
+         crate::store::recording_mode_slug()
+             .as_deref()
+             .and_then(Self::from_slug)
+-            .unwrap_or(Self::Instant)
++            .unwrap_or(Self::Studio)
+     }
+ 
+     pub fn icon(self) -> &'static str {
+diff --git a/apps/desktop-gpui/src/settings_window.rs b/apps/desktop-gpui/src/settings_window.rs
+index 855590d..9eba893 100644
+--- a/apps/desktop-gpui/src/settings_window.rs
++++ b/apps/desktop-gpui/src/settings_window.rs
+@@ -3350,28 +3350,45 @@ impl SettingsWindow {
+             None,
+             vec![
+                 self.rows(vec![
+-                    self.setting_row(
+-                        tr::settings::general::app::dock_icon::label(),
+-                        Some(tr::settings::general::app::dock_icon::description()),
+-                        // The row is the *inverse* of the stored key.
+-                        self.toggle(
+-                            "hide-dock-icon",
++                    if cfg!(target_os = "windows") {
++                        self.setting_row(
++                            tr::settings::general::app::tray_icon::label(),
++                            Some(tr::settings::general::app::tray_icon::description()),
++                            self.toggle(
++                                "show-tray-icon",
++                                tr::settings::general::app::tray_icon::label(),
++                                self.settings.show_tray_icon,
++                                cx,
++                                |this, cx| {
++                                    this.settings.show_tray_icon = !this.settings.show_tray_icon;
++                                    let value = this.settings.show_tray_icon;
++                                    this.write_bool("showTrayIcon", value, cx);
++                                    #[cfg(target_os = "windows")]
++                                    cx.defer(crate::tray::refresh_visibility);
++                                },
++                            ).into_any_element(),
++                        ).into_any_element()
++                    } else {
++                        self.setting_row(
+                             tr::settings::general::app::dock_icon::label(),
+-                            !self.settings.hide_dock_icon,
+-                            cx,
+-                            |this, cx| {
+-                                this.settings.hide_dock_icon = !this.settings.hide_dock_icon;
+-                                let value = this.settings.hide_dock_icon;
+-                                this.write_bool("hideDockIcon", value, cx);
+-                                // `GeneralSettingsStore::set` -> the store
+-                                // listener -> `schedule_macos_dock_visibility_sync`.
+-                                // Deferred past the debounced write, which is
+-                                // what the sync then reads back.
+-                                cx.defer(|cx: &mut gpui::App| crate::menus::schedule_dock_sync(cx));
+-                            },
++                            Some(tr::settings::general::app::dock_icon::description()),
++                            // The row is the *inverse* of the stored key.
++                            self.toggle(
++                                "hide-dock-icon",
++                                tr::settings::general::app::dock_icon::label(),
++                                !self.settings.hide_dock_icon,
++                                cx,
++                                |this, cx| {
++                                    this.settings.hide_dock_icon = !this.settings.hide_dock_icon;
++                                    let value = this.settings.hide_dock_icon;
++                                    this.write_bool("hideDockIcon", value, cx);
++                                    cx.defer(|cx: &mut gpui::App| crate::menus::schedule_dock_sync(cx));
++                                },
++                            )
++                            .into_any_element(),
+                         )
+-                        .into_any_element(),
+-                    ),
++                        .into_any_element()
++                    },
+                     self.setting_row(
+                         tr::settings::general::app::notifications::label(),
+                         Some(tr::settings::general::app::notifications::description()),
+diff --git a/apps/desktop-gpui/src/store.rs b/apps/desktop-gpui/src/store.rs
+index d2ac2be..95016ce 100644
+--- a/apps/desktop-gpui/src/store.rs
++++ b/apps/desktop-gpui/src/store.rs
+@@ -738,7 +738,7 @@ settings_enum! {
+         ScreenRegion = "screenRegion", tr::settings::options::window_capture::screen_region();
+         FocusedWindow = "focusedWindow", tr::settings::options::window_capture::focused_window();
+     }
+-    default = ScreenRegion
++    default = FocusedWindow
+ }
+ 
+ settings_enum! {
+@@ -960,6 +960,8 @@ pub struct GeneralSettings {
+     /// GPUI-only key; the Tauri app keeps it as an unknown field.
+     pub ui_language: Option<String>,
+     pub hide_dock_icon: bool,
++    /// Whether to show the Windows tray icon when not recording.
++    pub show_tray_icon: bool,
+     pub enable_notifications: bool,
+     pub instant_mode_max_resolution: u32,
+     pub disable_auto_open_links: bool,
+@@ -1303,7 +1305,7 @@ pub fn set_recording_microphone_name(name: Option<&str>) -> bool {
+ /// `RecordingSettingsStore.mode`, i.e. `cap_recording::RecordingMode` under
+ /// `#[serde(rename_all = "camelCase")]` -- one lowercase word per variant
+ /// (`studio`, `instant`, `screenshot`). `None` when the key is absent, which
+-/// `get_current_mode` turns into `RecordingMode::default()` (Instant).
++/// the GPUI main window defaults to Studio when no mode has been saved.
+ pub fn recording_mode_slug() -> Option<String> {
+     store_section(RECORDING_SETTINGS)
+         .get("mode")
+@@ -1401,6 +1403,7 @@ impl GeneralSettings {
+             theme: enum_at(general, "theme"),
+             ui_language: opt_string_at(general, crate::i18n::SETTING_KEY),
+             hide_dock_icon: bool_at(general, "hideDockIcon", false),
++            show_tray_icon: bool_at(general, "showTrayIcon", false),
+             enable_notifications: bool_at(general, "enableNotifications", true),
+             instant_mode_max_resolution: u32_at(general, "instantModeMaxResolution", 1920),
+             disable_auto_open_links: bool_at(general, "disableAutoOpenLinks", false),
+@@ -1408,7 +1411,7 @@ impl GeneralSettings {
+                 .get(SHOW_MAIN_WINDOW_AFTER_INSTANT_KEY)
+                 .and_then(Value::as_bool),
+             studio_recording_quality: enum_at(general, "studioRecordingQuality"),
+-            recording_countdown: opt_u32_at(general, "recordingCountdown"),
++            recording_countdown: Some(u32_at(general, "recordingCountdown", 5)),
+             main_window_recording_start_behaviour: enum_at(
+                 general,
+                 "mainWindowRecordingStartBehaviour",
+@@ -3086,6 +3089,19 @@ mod tests {
+     /// Every value the page can read back has to survive the round trip, and
+     /// an unknown enum value must degrade to that one row's default rather
+     /// than blanking the page.
++    #[test]
++    fn personalized_defaults_and_saved_choices() {
++        let defaults = GeneralSettings::default();
++        assert_eq!(defaults.recording_countdown, Some(5));
++        assert_eq!(defaults.window_capture_style, WindowCaptureStyle::FocusedWindow);
++        assert!(!defaults.show_tray_icon);
++        let general = serde_json::json!({"recordingCountdown": 0, "windowCaptureStyle": "screenRegion", "showTrayIcon": true});
++        let saved = GeneralSettings::from_sections(general.as_object().unwrap(), &Map::new(), &Map::new());
++        assert_eq!(saved.recording_countdown, Some(0));
++        assert_eq!(saved.window_capture_style, WindowCaptureStyle::ScreenRegion);
++        assert!(saved.show_tray_icon);
++    }
++
+     #[test]
+     fn typed_reads_match_the_store_shape() {
+         let _store = TempStore::new(
+diff --git a/apps/desktop-gpui/src/tray/windows.rs b/apps/desktop-gpui/src/tray/windows.rs
+index 1e311ff..bb250a4 100644
+--- a/apps/desktop-gpui/src/tray/windows.rs
++++ b/apps/desktop-gpui/src/tray/windows.rs
+@@ -64,6 +64,7 @@ pub fn init(cx: &mut App) {
+         }
+     }));
+     cx.set_global(tray);
++    refresh_visibility(cx);
+ 
+     cx.spawn(async move |cx| {
+         while let Ok(event) = rx.recv_async().await {
+@@ -209,12 +210,32 @@ fn build_native_item(
+     }
+ }
+ 
++fn tray_visible(always_show: bool, recording: bool) -> bool {
++    always_show || recording
++}
++
++/// Keep the stop icon available while recording, even when the idle icon is hidden.
++pub fn refresh_visibility(cx: &mut App) {
++    if !cx.has_global::<Tray>() {
++        return;
++    }
++    let always_show = crate::store::GeneralSettings::load().show_tray_icon;
++    let tray = cx.global::<Tray>();
++    if let Err(error) = tray.icon.set_visible(tray_visible(always_show, tray.recording)) {
++        tracing::warn!(%error, "failed to update Windows tray visibility");
++    }
++}
++
+ pub fn set_recording(recording: bool, cx: &mut App) {
+     if !cx.has_global::<Tray>() {
+         return;
+     }
++    let always_show = crate::store::GeneralSettings::load().show_tray_icon;
+     let tray = cx.global_mut::<Tray>();
+     tray.recording = recording;
++    if let Err(error) = tray.icon.set_visible(tray_visible(always_show, recording)) {
++        tracing::warn!(%error, "failed to update Windows tray visibility");
++    }
+     if recording {
+         tray.icon.set_menu(None);
+     } else {
+@@ -310,6 +331,14 @@ mod tests {
+     use super::*;
+     use tray_icon::{MouseButton, Rect};
+ 
++    #[test]
++    fn tray_visibility_keeps_stop_accessible() {
++        assert!(!super::tray_visible(false, false));
++        assert!(super::tray_visible(false, true));
++        assert!(super::tray_visible(true, false));
++        assert!(super::tray_visible(true, true));
++    }
++
+     #[test]
+     fn menu_titles_preserve_literal_ampersands() {
+         assert_eq!(
+diff --git a/crates/project/src/configuration.rs b/crates/project/src/configuration.rs
+index d7eb3c5..d39ef83 100644
+--- a/crates/project/src/configuration.rs
++++ b/crates/project/src/configuration.rs
+@@ -892,7 +892,12 @@ impl Default for CursorConfiguration {
+             base_rotation: 0.0,
+             click_spring: None,
+             stop_movement_in_last_seconds: None,
+-            ripple: CursorRippleConfig::default(),
++            // New projects show click ripples; older projects missing this
++            // field retain CursorRippleConfig's disabled deserialization default.
++            ripple: CursorRippleConfig {
++                enabled: true,
++                ..CursorRippleConfig::default()
++            },
+         };
+ 
+         if let Some(preset) = animation_style.preset() {
+@@ -5435,6 +5440,12 @@ mod tests {
+         assert_eq!(spring.mass, default_spring.mass);
+     }
+ 
++    #[test]
++    fn new_project_enables_click_ripples() {
++        assert!(ProjectConfiguration::default().cursor.ripple.enabled);
++        assert!(!CursorRippleConfig::default().enabled);
++    }
++
+     #[test]
+     fn legacy_cursor_config_loads_with_ripple_defaults() {
+         let dir = tempfile::tempdir().unwrap();
+diff --git a/crates/rendering/src/lib.rs b/crates/rendering/src/lib.rs
+index 4ec21ae..573a277 100644
+--- a/crates/rendering/src/lib.rs
++++ b/crates/rendering/src/lib.rs
+@@ -5770,6 +5770,7 @@ mod tests {
+     #[test]
+     fn click_ripples_respect_visibility_and_the_instance_limit() {
+         let mut project = ProjectConfiguration::default();
++        project.cursor.ripple.enabled = false;
+         let events = CursorEvents {
+             clicks: (0..10)
+                 .map(|index| ripple_click(index as f64, true))

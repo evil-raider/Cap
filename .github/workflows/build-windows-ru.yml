@@ -14,6 +14,21 @@ jobs:
       RUST_TARGET_TRIPLE: x86_64-pc-windows-msvc
     steps:
       - uses: actions/checkout@v4
+      - name: Apply requested defaults to source
+        shell: bash
+        run: |
+          set -euo pipefail
+          patch=.github/cap-requested-defaults.patch
+          if [ -f "$patch" ]; then
+            git apply --cached --check "$patch"
+            git apply --cached "$patch"
+            git diff --cached --name-only -z | xargs -0 git checkout-index -f --
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git rm "$patch"
+            git commit -m "Set requested Windows recording defaults"
+            git push origin HEAD:russian-localization
+          fi
       - name: Restore Russian catalog
         shell: bash
         run: |
